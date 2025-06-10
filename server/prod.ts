@@ -51,7 +51,7 @@ app.use((req, res, next) => {
   });
 
   // Serve static files from the dist/public directory
-  const distPath = path.resolve(import.meta.dirname, "public");
+  const distPath = path.resolve(process.cwd(), "dist", "public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
