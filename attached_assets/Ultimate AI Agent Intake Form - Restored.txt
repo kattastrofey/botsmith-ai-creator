@@ -1,0 +1,138 @@
+<html>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f9f9f9; padding: 20px;">
+  <div style="max-width: 650px; margin: auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);">
+    <h1 style="color: #5A3E85; text-align: center; font-size: 28px;">🤖 Ultimate AI Agent Intake Form 🤖</h1>
+    <p style="font-size: 16px; text-align: center; color: #666;">Let's create an AI that's as unique as you are! <br>(No boring cookie-cutter bots allowed here)</p>
+    
+    <div style="border-left: 4px solid #5A3E85; padding-left: 15px; margin: 20px 0; font-style: italic; color: #666;">
+      <p>Reply to this email with your answers below each question. Don't worry about being perfect—the more "you" your answers are, the better your AI will be!</p>
+    </div>
+
+    <!-- CORE IDENTITY -->
+    <div style="background-color: #f0e6ff; padding: 20px; border-radius: 8px; margin: 25px 0;">
+      <h2 style="color: #5A3E85; margin-top: 0;">🧠 Core Identity</h2>
+      
+      <p><strong>1. What would you like to name your AI agent?</strong></p>
+      <p style="color: #666; font-style: italic;">This creates an immediate personal connection. Could be anything from "Alex" to "Captain Awesome" to "Pixel" — whatever feels right!</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+
+      <p><strong>2. In 2-3 sentences, describe your AI agent's personality:</strong></p>
+      <p style="color: #666; font-style: italic;">Examples: "Sarcastic but supportive, like a friend who won't let me get away with excuses but always has my back." OR "Calm and methodical, like a zen master meets scientist."</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+
+      <p><strong>3. Choose your AI's communication style:</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Direct and concise ("Here's what you need to do...")</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Warm and conversational ("Hey there! I was thinking we could...")</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Witty and humorous ("Another day, another existential crisis to solve!")</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Formal and professional ("I would like to suggest the following course of action...")</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Other: [Please specify]</li>
+      </ul>
+
+      <p><strong>4. If your AI had a human job title, what would it be?</strong></p>
+      <p style="color: #666; font-style: italic;">Examples: "Snarky Life Coach," "Executive Brain Assistant," "Creative Muse," "Chief Overthinking Prevention Officer"</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+    </div>
+
+    <!-- PURPOSE & FUNCTIONALITY -->
+    <div style="background-color: #e6fff0; padding: 20px; border-radius: 8px; margin: 25px 0;">
+      <h2 style="color: #2E8B57; margin-top: 0;">🎯 Purpose & Functionality</h2>
+      
+      <p><strong>5. What are the TOP 3 tasks you want your AI to help with?</strong></p>
+      <p style="color: #666; font-style: italic;">Be specific! Examples: "Help me stick to my workout schedule by checking in daily and not accepting my lame excuses" or "Brainstorm creative marketing ideas when I'm stuck in a rut"</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+
+      <p><strong>6. Which areas of your life will this AI assist with?</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Personal productivity (because your to-do list is currently in 17 different places)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Health & fitness (for when you need someone to remind you that, yes, the gym still exists)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Creative projects (for battling the blank page and "I have no ideas" syndrome)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Learning & education (because that skill isn't going to learn itself)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Home management (for when adulting is just too much)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Financial tracking (so you can pretend to be responsible with money)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Emotional support (for those moments when humans just don't get it)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Entertainment & recommendations (because you've watched everything on Netflix... twice)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Other: [Please specify]</li>
+      </ul>
+
+      <p><strong>7. How would you like your AI to approach problems?</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Offer multiple solutions with pros/cons (for the overthinkers who need ALL the options)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Give one clear recommendation (for the "just tell me what to do" crowd)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Ask questions to help me figure it out myself (for those who want to feel smart)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Provide step-by-step guidance (for when you need your hand held... no judgment)</li>
+      </ul>
+    </div>
+
+    <!-- INTERACTION PREFERENCES -->
+    <div style="background-color: #fff0e6; padding: 20px; border-radius: 8px; margin: 25px 0;">
+      <h2 style="color: #E67E22; margin-top: 0;">🗣️ Interaction Preferences</h2>
+      
+      <p><strong>8. How should your AI respond when you're stressed or frustrated?</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> With calm, practical solutions ("Here's what we can do about this...")</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> With empathy and emotional support ("That sounds really tough. I'm here for you.")</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> With humor to lighten the mood ("Well, at least your hair still looks great!")</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> By giving you space and minimal responses (sometimes less is more)</li>
+      </ul>
+
+      <p><strong>9. How much detail do you prefer in responses?</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Ultra-concise (bullet points, minimal text, for the "get to the point" people)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Balanced (clear but complete, for the Goldilocks "just right" crowd)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Detailed (thorough explanations, for the "I want to understand everything" folks)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Adaptive (brief at first, with option to expand, for the "it depends on my mood" types)</li>
+      </ul>
+
+      <p><strong>10. What topics should your AI NEVER bring up?</strong></p>
+      <p style="color: #666; font-style: italic;">We all have our no-go zones. Examples: "Diet culture," "Politics," "My ex," "That time I embarrassed myself at the company party"</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+    </div>
+
+    <!-- TECHNICAL PREFERENCES -->
+    <div style="background-color: #e6f0ff; padding: 20px; border-radius: 8px; margin: 25px 0;">
+      <h2 style="color: #3498DB; margin-top: 0;">⚙️ Technical Preferences</h2>
+      
+      <p><strong>11. How tech-savvy are you?</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Beginner (I still print out my emails)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Intermediate (I can usually figure things out with some Googling)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Advanced (I'm the person everyone calls for tech support)</li>
+        <li style="margin-bottom: 8px;"><input type="radio" disabled> Expert (I dream in code)</li>
+      </ul>
+
+      <p><strong>12. What devices will you primarily use to interact with your AI?</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Smartphone (for AI on the go)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Computer/laptop (for serious business)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Tablet (for that in-between feeling)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Smart speaker (for when typing is too much effort)</li>
+        <li style="margin-bottom: 8px;"><input type="checkbox" disabled> Other: [Please specify]</li>
+      </ul>
+    </div>
+
+    <!-- PERSONAL TOUCHES -->
+    <div style="background-color: #ffe6f0; padding: 20px; border-radius: 8px; margin: 25px 0;">
+      <h2 style="color: #E84393; margin-top: 0;">✨ Personal Touches</h2>
+      
+      <p><strong>13. What's one quirk or inside joke you'd like your AI to have?</strong></p>
+      <p style="color: #666; font-style: italic;">Examples: "Always blames Mercury retrograde for problems," "Makes puns about cheese," "Refers to my cat as 'The Supreme Leader'"</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+
+      <p><strong>14. If your AI had a catchphrase, what would it be?</strong></p>
+      <p style="color: #666; font-style: italic;">Examples: "Let's crush this!" or "According to my calculations..." or "Have you tried turning yourself off and on again?"</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px;">[Your answer here]</p>
+
+      <p><strong>15. Anything else you want us to know about you or your AI agent?</strong></p>
+      <p style="color: #666; font-style: italic;">This is your chance to tell us anything else that might help us create your perfect AI companion!</p>
+      <p style="background-color: rgba(255,255,255,0.7); padding: 10px; border-radius: 4px; min-height: 100px;">[Your answer here]</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding: 15px; border-top: 1px solid #ddd;">
+      <p style="color: #5A3E85; font-weight: bold;">Thank you for helping us create your perfect AI companion!</p>
+      <p>Just reply to this email with your answers, and we'll get started on bringing your AI to life.</p>
+      <p style="color: #999; font-size: 12px;">Powered by adopt.a.bot | Your AI, Your Way</p>
+    </div>
+  </div>
+</body>
+</html>

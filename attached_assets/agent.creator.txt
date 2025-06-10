@@ -1,0 +1,165 @@
+// frontend/src/App.js
+import React, { useState, useEffect, useRef } from 'react';
+import './App.css'; // Ensure TailwindCSS is set up
+
+const BACKEND_URL = 'http://localhost:5000';
+let messageIdCounter = 0;
+const getUniqueMessageKey = () => `msg-${messageIdCounter++}`;
+
+function App() {
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState('');
+  const [isBotThinking, setIsBotThinking] = useState(false);
+  const [chatSessionId, setChatSessionId] = useState(null);
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  useEffect(() => {
+    const newSessionId = `session-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+    setChatSessionId(newSessionId);
+    handleBackendInteraction('__START__', newSessionId);
+  }, []);
+
+  const addMessage = (sender, text, options = []) => {
+    setMessages(prev => [...prev, { key: getUniqueMessageKey(), sender, text, options }]);
+  };
+
+  const handleBackendInteraction = async (messageText, sessionId, isSystemMessage = false) => {
+    if (!sessionId) {
+      addMessage('bot', "Oops! My magic connection is fuzzy. Please refresh. ✨");
+      return;
+    }
+
+    setIsBotThinking(true);
+    if (!isSystemMessage && messageText !== "__START__") { // Don't show system messages or __START__ as user message
+        // If messageText is a value from a button that already has a label,
+        // we might want to use the label for display. For now, just use messageText.
+       addMessage('user', messageText.startsWith("Selected: ") ? messageText : `You chose: ${messageText}`);
+    }
+    setUserInput('');
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/chat-mvp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId, message: messageText }),
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      setIsBotThinking(false);
+      addMessage('bot', data.reply, data.options || []);
+    } catch (error) {
+      console.error("Error contacting backend:", error);
+      setIsBotThinking(false);
+      addMessage('bot', "Oh dear, my crystal ball is cloudy... I couldn't connect. Try again! 🧚‍♀️");
+    }
+  };
+
+  const handleSend = () => {
+    if (userInput.trim() === '' || isBotThinking) return;
+    handleBackendInteraction(userInput, chatSessionId);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSend();
+    }
+  };
+
+  const handleOptionClick = (option) => {
+    if (option.value === "download_config_action") {
+      // Handle download directly
+      const downloadUrl = `${BACKEND_URL}/api/download-config/${chatSessionId}`;
+      addMessage('user', `Action: Download Configuration Summary`); // Log user action
+      window.open(downloadUrl, '_blank'); // Open in new tab to trigger download
+      // After triggering download, WHIM should ideally follow up.
+      // We'll send a system message to backend to proceed conversation.
+      // Or, make one of the other buttons ("Ask about Consultation") the primary next step.
+      // For this iteration, let's assume clicking download is an action, and user then clicks "Ask about consultation" or "Start new"
+      // To make it smoother, the backend could automatically send the next message after a download *action*
+      // For now, the user would need to click another option to continue the chat flow.
+      // Or, we can make "download_config_action" also send a message to the backend
+      // to trigger the next part of the conversation.
+      handleBackendInteraction("download_config_action", chatSessionId, true); // Inform backend to move to next step
+    } else {
+      // For other options, display the chosen label for clarity
+      addMessage('user', `Selected: ${option.label}`);
+      handleBackendInteraction(option.value, chatSessionId, true); // Send the option's value
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.chatWindow}>
+        <div style={styles.header}>
+          <span style={styles.fairyEmoji}>🧚‍♀️</span> WHIM - Your AI Helper Guide <span style={styles.sparkleEmoji}>✨</span>
+        </div>
+        <div style={styles.messagesArea}>
+          {messages.map((msg) => (
+            <div key={msg.key} style={msg.sender === 'user' ? styles.userMessage : styles.botMessage}>
+              <div style={styles.messageBubble(msg.sender)}>
+                <p style={styles.messageText} dangerouslySetInnerHTML={{ __html: msg.text.replace(/\n/g, '<br />') }}></p>
+                {msg.sender === 'bot' && msg.options && msg.options.length > 0 && (
+                  <div style={styles.optionsContainer}>
+                    {msg.options.map((option, index) => (
+                      <button
+                        key={index}
+                        style={styles.optionButton}
+                        onClick={() => handleOptionClick(option)}
+                        disabled={isBotThinking}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+          {isBotThinking && (
+            <div style={styles.botMessage}>
+               <div style={styles.messageBubble('bot')}><p style={styles.typingIndicator}>WHIM is conjuring a reply...</p></div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+        <div style={styles.inputArea}>
+          <input
+            type="text" style={styles.inputField} value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            onKeyPress={handleKeyPress} placeholder="Talk to WHIM here..." disabled={isBotThinking}
+          />
+          <button style={styles.sendButton} onClick={handleSend} disabled={isBotThinking || userInput.trim() === ''}>
+            Send ✨
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- Basic Inline Styles (Same as before, for brevity) ---
+const styles = {
+  container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%)' },
+  chatWindow: { width: '90%', maxWidth: '600px', height: '80vh', backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '20px', boxShadow: '0 10px 30px rgba(100, 100, 150, 0.2)', display: 'flex', flexDirection: 'column', overflow: 'hidden', border: '1px solid #e0e0ff' },
+  header: { padding: '15px 20px', backgroundColor: 'rgba(227, 215, 232, 0.8)', color: '#5A3E85', fontWeight: 'bold', textAlign: 'center', fontSize: '1.1em', borderBottom: '1px solid #d8c8e0', flexShrink: 0 },
+  fairyEmoji: { marginRight: '8px', fontSize: '1.2em' },
+  sparkleEmoji: { marginLeft: '8px', fontSize: '1.2em' },
+  messagesArea: { flexGrow: 1, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px' },
+  userMessage: { display: 'flex', justifyContent: 'flex-end', marginLeft: '40px' },
+  botMessage: { display: 'flex', justifyContent: 'flex-start', marginRight: '40px' },
+  messageBubble: (sender) => ({ maxWidth: '80%', padding: '10px 15px', borderRadius: sender === 'user' ? '20px 20px 5px 20px' : '20px 20px 20px 5px', backgroundColor: sender === 'user' ? '#a29bfe' : '#f0e6ff', color: sender === 'user' ? 'white' : '#4a3e6e', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.05)', wordWrap: 'break-word' }),
+  messageText: { margin: 0, lineHeight: 1.4, whiteSpace: 'pre-wrap' }, // Added pre-wrap for newlines
+  inputArea: { display: 'flex', padding: '15px', borderTop: '1px solid #d8c8e0', backgroundColor: 'rgba(255, 255, 255, 0.8)', flexShrink: 0 },
+  inputField: { flexGrow: 1, border: '1px solid #ccc0d8', borderRadius: '20px', padding: '10px 15px', fontSize: '1em', outline: 'none', marginRight: '10px', backgroundColor: '#fff' },
+  sendButton: { padding: '10px 20px', backgroundColor: '#8a63d2', color: 'white', border: 'none', borderRadius: '20px', cursor: 'pointer', fontSize: '1em', fontWeight: 'bold', transition: 'background-color 0.3s' },
+  typingIndicator: { fontStyle: 'italic', color: '#666', fontSize: '0.9em'},
+  optionsContainer: { marginTop: '10px', display: 'flex', flexWrap: 'wrap', gap: '8px' },
+  optionButton: { padding: '8px 15px', backgroundColor: 'rgba(255, 255, 255, 0.8)', color: '#5A3E85', border: '1px solid #c8b8d8', borderRadius: '15px', cursor: 'pointer', fontSize: '0.9em', transition: 'background-color 0.3s, box-shadow 0.2s', ':hover': { backgroundColor: '#fff', boxShadow: '0 2px 4px rgba(0,0,0,0.1)'}}
+};
+
+export default App;

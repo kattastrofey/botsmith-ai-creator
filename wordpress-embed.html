@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotSmith - AI Agent Creator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #20b2aa 0%, #87ceeb 50%, #da70d6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .botsmith-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            min-height: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(32, 178, 170, 0.3);
+        }
+        
+        .botsmith-header {
+            background: linear-gradient(135deg, #da70d6 0%, #87ceeb 50%, #20b2aa 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .botsmith-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .botsmith-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .botsmith-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .botsmith-iframe {
+            width: 100%;
+            height: calc(100% - 100px);
+            border: none;
+            background: white;
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(32, 178, 170, 0.2);
+            border-top: 4px solid #20b2aa;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: #20b2aa;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .botsmith-container {
+                height: 95vh;
+                border-radius: 15px;
+            }
+            
+            .botsmith-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .botsmith-header p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .botsmith-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .botsmith-header {
+                padding: 15px;
+            }
+            
+            .botsmith-header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="botsmith-container">
+        <div class="botsmith-header">
+            <h1>🤖 BotSmith AI Agent Creator</h1>
+            <p>Create your personalized AI agent in minutes</p>
+        </div>
+        
+        <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading BotSmith...</div>
+        </div>
+        
+        <iframe 
+            id="botsmithFrame"
+            class="botsmith-iframe" 
+            src="http://localhost:3000/enhanced-conversation"
+            title="BotSmith AI Agent Creator"
+            allow="clipboard-write; web-share"
+            onload="hideLoader()"
+            style="display: none;">
+        </iframe>
+    </div>
+
+    <script>
+        function hideLoader() {
+            const spinner = document.getElementById('loadingSpinner');
+            const iframe = document.getElementById('botsmithFrame');
+            
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                iframe.style.display = 'block';
+            }, 500);
+        }
+        
+        setTimeout(() => {
+            hideLoader();
+        }, 5000);
+        
+        window.addEventListener('message', function(event) {
+            console.log('Message received from iframe:', event.data);
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your AI Agent - BotSmith</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        .iframe-container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+        }
+        .botsmith-iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+            border-radius: 20px;
+            display: block;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            opacity: 0.8;
+        }
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+            .botsmith-iframe {
+                height: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Create Your Perfect AI Agent</h1>
+            <p>Chat with BotSmith to build a custom AI assistant tailored specifically for your business needs</p>
+        </div>
+        
+        <div class="iframe-container">
+            <iframe 
+                src="http://localhost:3000/create-agent" 
+                class="botsmith-iframe"
+                title="BotSmith AI Agent Creator"
+                allowfullscreen>
+                <p>Your browser doesn't support iframes. Please <a href="http://localhost:3000/create-agent">click here</a> to create your AI agent.</p>
+            </iframe>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Need help getting started?</strong> <a href="mailto:support@adoptabot.info">Contact our team</a> for personalized assistance!</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Powered by <strong>adopt.a.bot</strong> | Your AI, Your Way</p>
+        </div>
+    </div>
+    
+    <script>
+        // Handle iframe communication for better integration
+        window.addEventListener('message', function(event) {
+            // Handle messages from the iframe if needed
+            if (event.data && event.data.type === 'resize') {
+                const iframe = document.querySelector('.botsmith-iframe');
+                if (iframe) {
+                    iframe.style.height = event.data.height + 'px';
+                }
+            }
+        });
+        
+        // Smooth loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('.botsmith-iframe');
+            iframe.addEventListener('load', function() {
+                console.log('BotSmith loaded successfully!');
+            });
+        });
+    </script>
+</body>
+</html>
+
