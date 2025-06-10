@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
 import { log } from "./utils";
 import path from "path";
 import fs from "fs";
@@ -40,6 +39,8 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Import routes dynamically to avoid schema conflicts
+  const { registerRoutes } = await import("./routes.js");
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
